@@ -13,6 +13,7 @@ class Calculator {
     }
 
     delete(){
+        this.currentOperand = this.currentOperand.toString().slice(0, -1)
 
     }
 
@@ -22,13 +23,13 @@ class Calculator {
     }
 
     chooseOperation(operation) {
-        if (this.currentOperand === '') return
+        if (this.currentOperand === '')return
         if (this.previousOperand !== '') {
             this.compute()
         }
         this.operation = operation
         this.previousOperand = this.currentOperand
-        this.currentOperand = ''
+        this.currentOperand = ''       
     }
 
     compute() {
@@ -57,9 +58,19 @@ class Calculator {
         this.previousOperand = ''
     }
 
+    /* getDisplayNumber(number) {
+        const stringNumber = number.toString()
+        const integerDigits =
+        const floatNumber = parseFloat(number)
+        return number
+    } */
+
     updateDisplay() {
         this.currentOperandTextElement.innerText = this.currentOperand
-        this.previousOperandTextElement.innerText = this.previousOperand
+        if (this.operation != null){
+         this.previousOperandTextElement.innerText = 
+        `${this.previousOperand} ${this.operation}`
+        }
     }
 
 }
@@ -88,6 +99,17 @@ operationButtons.forEach(button => {
 })
 
 equalsButton.addEventListener('click', button => {
-    calculator.compute()
-    calculator.updateDisplay()
+   calculator.compute()
+   calculator.updateDisplay()
 })
+
+allClearButton.addEventListener('click', button => {
+    calculator.clear()
+    calculator.updateDisplay()
+ })
+
+ deleteButton.addEventListener('click', button => {
+    calculator.delete()
+    calculator.updateDisplay()
+ })
+
